@@ -10,11 +10,11 @@
 set -o pipefail
 shopt -s inherit_errexit
 
-sudo apt-get install build-essential -y
+apt-get install build-essential -y
 
 # https://docs.nvidia.com/datacenter/tesla/tesla-installation-notes/index.html#runfile
-sudo rmmod nouveau || true
-sudo sh ./$(basename $(curl -s -w "%{url_effective}" https://us.download.nvidia.com/tesla/535.104.12/NVIDIA-Linux-x86_64-535.104.12.run -O)) -s
+rmmod nouveau || true
+sh ./$(basename $(curl -s -w "%{url_effective}" https://us.download.nvidia.com/tesla/535.104.12/NVIDIA-Linux-x86_64-535.104.12.run -O)) -s
 
 # https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
