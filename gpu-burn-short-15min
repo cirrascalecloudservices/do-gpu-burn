@@ -21,4 +21,4 @@ apt-get update -y
 apt-get install cuda-toolkit -y
 
 # STEP 3 gpu-burn
-git clone https://github.com/wilicc/gpu-burn && cd gpu-burn && make && ./gpu_burn
+git clone https://github.com/wilicc/gpu-burn && cd gpu-burn && make && ./gpu_burn 900
