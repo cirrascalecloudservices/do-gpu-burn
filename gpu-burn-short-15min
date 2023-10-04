@@ -10,8 +10,6 @@ apt-get install build-essential linux-headers-$(uname -r) -y # maas test ephemer
 latest=$(curl -s https://download.nvidia.com/XFree86/Linux-x86_64/latest.txt | col2)
 sh $(basename $(curl -s -w "%{url_effective}" https://download.nvidia.com/XFree86/Linux-x86_64/$latest -O)) -s
 
-nvidia-smi
-
 # STEP 2 install toolkit using apt
 # https://developer.nvidia.com/cuda-toolkit-archive
 arch=$(uname -m) # e.g,. x86_64
@@ -19,6 +17,8 @@ distro=ubuntu$(. /etc/os-release; echo $VERSION_ID | tr -d .) # e.g., ubuntu2004
 apt-get install ./$(basename $(curl -s -w "%{url_effective}" https://developer.download.nvidia.com/compute/cuda/repos/$distro/$arch/cuda-keyring_1.0-1_all.deb -O)) -y
 apt-get update -y
 apt-get install cuda-toolkit -y
+
+nvidia-smi
 
 # STEP 3 gpu-burn
 git clone https://github.com/wilicc/gpu-burn && cd gpu-burn && make && ./gpu_burn 900
