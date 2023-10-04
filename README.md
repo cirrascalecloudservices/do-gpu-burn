@@ -1,2 +1,2 @@
-# do-gpu-burn
-gpu-burn maas test integration
+# maas-gpu-burn
+gpu-burn maas test integrated
