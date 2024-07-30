@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+# maas-test-secure-erase - erase all nvme disks via nvme-cli secure erase
+#
+
+# Ensure the script is run as root
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
+
+# install nvme-cli
+apt update
+apt install -y nvme-cli
+
+# Get a list of NVMe devices
+nvme_devices=$(nvme list | grep /dev/nvme | awk '{print $1}')
+
+# Check if any NVMe devices were found
+if [ -z "$nvme_devices" ]; then
+  echo "No NVMe devices found."
+  exit 1
+fi
+
+# Loop over each NVMe device and perform secure erase
+for device in $nvme_devices; do
+  echo "Starting secure erase on $device"
+
+  # Perform a secure erase
+  nvme format $device --ses=1
+  
+  # Check if the secure erase was successful
+  if [ $? -ne 0 ]; then
+    echo "Secure erase failed for $device"
+  else
+    echo "Secure erase completed for $device"
+  fi
+done
+
+echo "Secure erase process completed for all detected NVMe devices."
