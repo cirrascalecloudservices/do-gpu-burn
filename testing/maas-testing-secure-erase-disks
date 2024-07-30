@@ -3,9 +3,11 @@
 # maas-commissioniing-secure-erase - erase all nvme disks via nvme-cli secure erase
 #
 # --- Start MAAS 1.0 script metadata ---
-# name: maas-commissioning-secure-erase
-# title: maas-commissioning-secure-erase
+# name: maas-testing-secure-erase
+# title: maas-testing-secure-erase
 # description: Erase all nvme disks via nvme-cli secure erase.
+# hardware_type: storage
+# destructive: true
 # --- End MAAS 1.0 script metadata ---
 
 # Ensure the script is run as root
